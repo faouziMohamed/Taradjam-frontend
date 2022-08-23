@@ -1,27 +1,13 @@
-import axios from 'axios';
 import useSWR from 'swr';
 
-/** @param {string} url */
-const fetcher = (url) => axios.get(url).then((res) => res.data);
-
-/**
- * @typedef  { QueriedSentences & { data:Sentence[]} } SentencesData
- */
-
-/**
- * @param {string} url
- * @param {boolean} random
- * @param {number} limit
- * @param {boolean} meta
- * @param {number} start
- */
+import { fetcher } from '@/lib/utils';
 
 /** @param {string} key */
 const useFetchSentences = (key) => {
-  /** @type {import("swr").SWRResponse<SentencesData>} */
+  /** @type {import("swr").SWRResponse<PaginationData<SentenceData>>} */
   const res = useSWR(key, fetcher);
   const { data, error, mutate } = res;
-  const hasMore = data && data.next < data.totalData;
+  const hasMore = data && data.nextPage < data.totalPageCount;
   return { data, error, mutate, hasMore, isLoading: !data };
 };
 
@@ -96,11 +82,11 @@ export const useRandomSentences = ({
   return useFetchSentences(key);
 };
 
-/** @param {{ tid: string, meta?: boolean }} param */
-export const useProposedTranslation = ({ tid, meta = false }) => {
-  const key = `/api/sentences/proposed?tid=${tid}&meta=${meta}`;
-  /** @type {import("swr").SWRResponse<WaitingQueueData>} */
+/** @param {string} tid */
+export function useProposedTranslation(tid) {
+  const key = `proposed/translations/${tid}`;
+  /** @type {import("swr").SWRResponse<SentenceProposition>} */
   const res = useSWR(key, fetcher);
   const { data, error, mutate } = res;
   return { data, error, mutate, isLoading: !data && !error };
-};
+}

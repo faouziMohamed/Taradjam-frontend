@@ -1,6 +1,3 @@
-/* eslint-disable react/no-unstable-nested-components */
-/* eslint-disable camelcase */
-/* eslint-disable import/no-unresolved */
 import 'dayjs/locale/fr';
 
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
@@ -25,9 +22,8 @@ export default function Index() {
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('tablet'));
   useEffect(() => setOpen(matches ? false : open || false), [matches, open]);
-  const response = useInfiniteSentences({ limit: 10, startCount: 1 });
+  const response = useInfiniteSentences({ pageSize: 10, page: 0 });
   const { isLoading, data, setSize, size, isReachingEnd } = response;
-
   const sentencesRes = useSentences(data);
   const [selectedSentence, sentences, selected, setSelected] = sentencesRes;
   const UsableListOfSentences = useCallback(
@@ -48,9 +44,9 @@ export default function Index() {
     // eslint-disable-next-line react-hooks/exhaustive-deps
     [sentences],
   );
-
   return (
     <AppLayout>
+      {/* Button shown on small screen */}
       <Button
         size='small'
         aria-label='Sentences list'
@@ -86,17 +82,19 @@ export default function Index() {
   );
 }
 
-/** @param {ResponseSentences[]} dataSentences */
+/**
+ * @summary Take the response data from the API response and transform them into an array of sentences
+ * @param {PaginationData<SentenceData>[]} dataSentences */
 function useSentences(dataSentences = []) {
-  /** @type {SentenceDataWithId[]} */
+  /** @type {SentenceData[]} */
   const sentences = [];
-  let selectedIndex;
+  let selectedIndex = 0;
   if (typeof window !== 'undefined') {
-    selectedIndex = Number(localStorage.getItem('selectedIndex')) || 0;
+    selectedIndex = Number(localStorage.getItem('selectedIndex'));
   }
   const [selected, setSelected] = useState(selectedIndex ?? 0);
   dataSentences.forEach(({ data }) => sentences.push(...data));
-  const selectedSentence =
-    sentences[selected >= 0 && selected < sentences.length ? selected : 0];
+  const index = selected >= 0 && selected < sentences.length ? selected : 0;
+  const selectedSentence = sentences[index];
   return [selectedSentence, sentences, selected, setSelected];
 }

@@ -23,26 +23,30 @@
  */
 
 /**
- * @typedef {{text_vo:string,translated_text:string, translated_by:string, translation_date:Date, accepted_by: string|ObjectId }} SentenceData
- * @typedef {SentenceData & {text_id:string}} SentenceDataWithId
- * @typedef {{ count: number; next: number; totalData: number;data: SentenceDataWithId[];langs: {fr: string;km: string;};}} ResponseSentences
-
+ * @typedef {{langId:number, langName:string, langShortName:string}} SrcLanguage
+ * @typedef {{textId:number, sentenceVo:string, srcLanguage:SrcLanguage }} SentenceData
+ * @template TDataReturned
+ * @typedef {{
+ * currentPageSize:number,
+ * totalPageCount:number,
+ * currentPage:number,
+ * nextPage:number,
+ * totalRecordCount:number,
+ * data:TDataReturned
+ * }} PaginationData<TDataReturned>
  */
 
 /**
- * @typedef {{
- *  translated_text:string,
- *  translated_by:string,
- *  translation_date,
- *  propId:string
- * }} Proposition
+ * @typedef {{upVote:number, downVote:number}} VotesCount
  *
  * @typedef {{
- *  idText_vo:string,
- *  propositions:Proposition[]
- *  accepted_by:string,
- *  acception_date:Date
- *  createdAt:Date
- *  updatedAt:Date *
- * }} WaitingQueueData
+ * propositionId:string,
+ * translatedText:string,
+ * translationHash:string,
+ * translatedBy:string,
+ * translationDate:Date,
+ * votes:VotesCount
+ *}} Proposition
+ *
+ * @typedef {{ sentenceId:string, propositions:Proposition[]}} SentenceProposition
  */

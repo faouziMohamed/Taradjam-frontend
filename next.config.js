@@ -10,8 +10,5 @@ module.exports = {
   async headers() {
     return [{ source: '/(.*)', headers: createSecureHeaders() }];
   },
-  // removeConsole: { exclude: excludeConsole },
-  experimental: {
-    outputStandalone: true,
-  },
+  output: 'standalone',
 };

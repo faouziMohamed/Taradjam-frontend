@@ -8,6 +8,19 @@ import { RectangularSkeletonWaves } from '@/components/misc/Skeletons';
 import TextVo from '@/components/translations/TextVo';
 import emptyList from '@/images/empty-list.svg';
 
+/**
+ *
+ * @param {{
+ * isLoading: boolean,
+ *  sentences: SentenceData[],
+ *  selected: boolean,
+ * setSelected: (sentence: SentenceData) => void,
+ * onLoadMore: () => void,
+ * isReachingEnd: boolean,
+ * onClick: ()=>void
+ * }} props
+ * @returns {JSX.Element}
+ */
 export default function ListOfSentences({
   isLoading,
   sentences,
@@ -24,18 +37,18 @@ export default function ListOfSentences({
       {isLoading ? (
         <RectangularSkeletonWaves length={10} />
       ) : (
-        sentences.map(({ text_id, text_vo, translated_text }, index) => {
+        sentences.map(({ textId, sentenceVo }, index) => {
           return (
-            <ListItem className='w-full p-2 flex flex-col' key={text_id}>
+            <ListItem className='w-full p-2 flex flex-col' key={textId}>
               <TextVo
-                text_id={text_id}
-                text_vo={text_vo}
-                translated_text={translated_text}
+                textId={textId}
+                sentenceVo={sentenceVo}
+                translatedText=''
                 isSelected={selected === index}
                 onClick={() => {
                   setSelected(index);
                   localStorage.setItem('selectedIndex', index);
-                  localStorage.setItem('text_id', text_id);
+                  localStorage.setItem('textId', textId);
                   onClick();
                 }}
                 className={`

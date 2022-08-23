@@ -8,19 +8,27 @@ import dayjs from 'dayjs';
 
 import { golfyNumber } from '@/lib/utils';
 
+/**
+ * @param {{
+ * propositionId:int,
+ * translatedText: string,
+ * translatedBy:string,
+ * translationDate:string
+ * }} props
+ */
 export default function ProposedTranslation({
-  propId,
-  translated_text,
-  translated_by,
-  translation_date,
+  propositionId,
+  translatedText,
+  translatedBy,
+  translationDate,
 }) {
-  const date = dayjs().to(new Date(translation_date));
+  const date = dayjs().to(new Date(translationDate));
   return (
     <ListItem className='w-full flex p-1 flex-col'>
       <Stack gap={0.1} className='w-full p-2 pb-0 border rounded '>
         <Typography
-          data-id={propId}
-          id={propId}
+          data-id={propositionId}
+          id={propositionId}
           lang='fr'
           tabIndex={0}
           component='h2'
@@ -30,11 +38,11 @@ export default function ProposedTranslation({
                         p-1 font-normal 
                     `}
         >
-          {translated_text}
+          {translatedText}
         </Typography>
         <Stack direction='row' className='justify-between items-center '>
           <Typography className='text-xs italic text-gray-500 px-1'>
-            {translated_by} • {date}
+            {translatedBy} • {date}
           </Typography>
           <Stack className='flex-row gap-0'>
             <Stack direction='row' gap={0} className='items-center'>

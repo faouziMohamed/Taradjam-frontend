@@ -5,7 +5,7 @@ export default function Copyright() {
     <Typography variant='body2' color='text.secondary' align='center'>
       {'Copyright © '}
       <Typography color='secondary' component='strong' className='inline-block'>
-        SHIKOMORI taradjam
+        {process.env.NEXT_PUBLIC_BACKEND_API_URL}
       </Typography>{' '}
       {new Date().getFullYear()}.
     </Typography>

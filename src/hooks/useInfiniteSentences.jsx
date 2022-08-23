@@ -1,52 +1,46 @@
-import axios from 'axios';
 import useSWRInfinite from 'swr/infinite';
 
-/** @param {string} url */
-export const fetcher = (url) => axios.get(url).then((res) => res.data);
+import { fetcher } from '@/lib/utils';
 
 /**
  * @typedef {{
- *   startId: string,
- *   limit: number,
- *   meta: boolean,
- *   startCount: number,
- *   meta: boolean,
+ *   pageSize: number,
+ *   page: number,
+ *   shuffle: boolean,
  *   variant: "translated" | "untranslated" | "both"
  * }} InfiniteSentencesProps
  *
  * @param {InfiniteSentencesProps} props
  */
-
-export default function useInfiniteSentences({
-  startId = undefined,
-  limit = 10,
-  startCursor = 1,
-  meta = false,
+function getKey({
+  page = 0,
+  pageSize = 10,
+  shuffle = false,
   variant = 'both',
 }) {
-  /** @type {import("swr/infinite").SWRInfiniteResponse<ResponseSentences>} */
-  const resul = useSWRInfinite(
-    /**
-     * @param {number} next
-     * @param {ResponseSentences} prevPageData
-     * */
-    (next, prevPageData) => {
-      if (prevPageData && !prevPageData.data?.length) return undefined;
-      const start =
-        next === 0 ? Number(startCursor) || 1 : Number(prevPageData?.next) || 1;
-      const startQuery = startId ? `startId=${startId}` : `start=${start}`;
-      const queries = {
-        both: `/api/sentences?${startQuery}&limit=${limit}&meta=${meta}`,
-        translated: `/api/translated/sentences?${startQuery}&limit=${limit}&meta=${meta}`,
-        untranslated: `/api/untranslated/sentences?${startQuery}&limit=${limit}&meta=${meta}`,
-      };
-      const q = queries[variant] || queries.both;
-      return q;
-    },
+  return (pageNumber = page) => {
+    const queries = { pageNumber, pageSize, shuffle, variant };
+    return `sentences?${new URLSearchParams(queries)}`;
+  };
+}
+
+/**
+ * @summary Fetches sentences from the backend using {@link useSWRInfinite} from swr package.
+ * @param {InfiniteSentencesProps} props
+ */
+export default function useInfiniteSentences({
+  pageSize = 10,
+  page = 0,
+  shuffle = false,
+  variant = 'both',
+}) {
+  /** @type {import("swr/infinite").SWRInfiniteResponse<PaginationData<SentenceData>>} */
+  const result = useSWRInfinite(
+    getKey(page, pageSize, shuffle, variant),
     fetcher,
   );
 
-  const { data, error, mutate, size, setSize, isValidating } = resul;
+  const { data, error, mutate, size, setSize, isValidating } = result;
   const isLoading = !data && !error;
   const isLoadingInitialData = !data && !error;
   if (typeof window !== 'undefined') {
@@ -54,14 +48,13 @@ export default function useInfiniteSentences({
     const sizeStored = Number(localStorage.getItem('size')) || 0;
     if (sizeStored > size) setSize(sizeStored);
   }
-
   const hasMore =
     isLoading || (size > 0 && data && typeof data[size - 1] !== 'undefined');
 
   const isEmpty = data?.[0]?.length === 0;
 
   const isReachingEnd =
-    isEmpty || (data && data[data.length - 1]?.length < limit);
+    isEmpty || (data && data[data.length - 1]?.length < pageSize);
 
   const isRefreshing = isValidating && data && data.length === size;
   const handleRefresh = () => mutate();

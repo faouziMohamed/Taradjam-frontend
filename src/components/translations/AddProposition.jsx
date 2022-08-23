@@ -4,12 +4,14 @@ import Slide from '@mui/material/Slide';
 import axios from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
 
+import { API_URL } from '@/lib/Constants';
+
 /**
  * @param {{
  *  textLoading: boolean,
  *  propositionLoading: boolean,
- *  selectedSentence:SentenceDataWithId,
- *  mutate: import('swr').KeyedMutator<WaitingQueueData>
+ *  selectedSentence:SentenceData,
+ *  mutate: import("swr").KeyedMutator<SentenceProposition>
  * }} props
  */
 
@@ -19,7 +21,7 @@ export default function AddProposition({
   mutate,
   propositionLoading,
 }) {
-  /** @type {import('react').MutableRefObject<HTMLFormElement>} */
+  /** @type {import("react").MutableRefObject<HTMLFormElement>} */
   const formRef = useRef(null);
   const [proposedTranslation, setProposedTranslation] = useState('');
   const [exists, setExists] = useState(false);
@@ -31,14 +33,16 @@ export default function AddProposition({
     async (e) => {
       e.preventDefault();
       const data = {
-        idText_vo: selectedSentence.text_id,
-        translated_text: proposedTranslation,
-        translated_by: author,
+        textVoId: selectedSentence.textId,
+        translatedText: proposedTranslation,
+        translatedBy: author,
+        translationDate: new Date(Date.now()),
+        translationLangId: 1,
       };
-      /** @type {import('axios').AxiosResponse} */
+      /** @type {import("axios").AxiosResponse} */
       let response;
       try {
-        response = await axios.post('/api/sentences/proposed', data);
+        response = await axios.post(`${API_URL}/propose/new/translation`, data);
         if ([200, 202].includes(response.status)) {
           setProposedTranslation('');
           e.target.reset();
@@ -49,7 +53,7 @@ export default function AddProposition({
         String(err.message).endsWith('409') && setExists(true);
       }
     },
-    [mutate, proposedTranslation, selectedSentence?.text_id],
+    [mutate, proposedTranslation, selectedSentence?.textId],
   );
   const label = 'Proposer une traduction';
   return (

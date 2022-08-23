@@ -1,4 +1,7 @@
+import axios from 'axios';
 import { createHash } from 'crypto';
+
+import { API_URL } from '@/lib/Constants';
 
 import AppError from './errors';
 
@@ -71,3 +74,18 @@ export function golfyNumber(number) {
 export function castToAppError(e, code = 500) {
   return e instanceof AppError ? e : new AppError(e.message, code || 500);
 }
+
+/**
+ * @param {string} url
+ * @template TData
+ * @returns {Promise<TData>}
+ */
+export const swrFetcher = (url) =>
+  axios.get(`${API_URL}/${url}`).then((res) => res.data);
+
+/**
+ * @param {string} url
+ * @template TData
+ * @returns {Promise<TData>}
+ */
+export const fetcher = (url) => swrFetcher(url);

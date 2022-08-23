@@ -11,14 +11,14 @@ import ProposedTranslation from './ProposedTranslation';
 /**
  * @param {{
  *   isLoading:boolean,
- *   selectedSentence:SentenceDataWithId
+ *   selectedSentence: SentenceData
  * }} props
  * */
 export default function TextTranslationPane({
   isLoading: textLoading,
   selectedSentence,
 }) {
-  const res = useProposedTranslation({ tid: selectedSentence?.text_id });
+  const res = useProposedTranslation(selectedSentence?.textId);
   const { data: proposed, isLoading: propositionLoading, error, mutate } = res;
   return (
     <Stack gap={2} className='p-3 overflow-auto'>
@@ -35,7 +35,7 @@ export default function TextTranslationPane({
             component='p'
             className='p-2 bg-opacity-100 rounded bg-cyan-100 text-center text-2xl'
           >
-            {selectedSentence.text_vo}
+            {selectedSentence.sentenceVo}
           </Typography>
         )}
         <AddProposition
@@ -56,21 +56,23 @@ export default function TextTranslationPane({
   );
 }
 
+/**
+ * @param {{ proposed: SentenceProposition }} props
+ * */
 function PropositionsWithTransition({ proposed }) {
+  if (!proposed || proposed.propositions.length === 0) return null;
   return (
     <TransitionGroup>
-      {proposed?.propositions?.map(
-        ({ propId, translated_by, translated_text, translation_date }) => (
-          <Collapse key={propId} in>
-            <ProposedTranslation
-              propId={propId}
-              translated_text={translated_text}
-              translated_by={translated_by}
-              translation_date={translation_date}
-            />
-          </Collapse>
-        ),
-      )}
+      {proposed?.propositions?.map((p) => (
+        <Collapse key={p.translationHash} in>
+          <ProposedTranslation
+            propositionId={p.propositionId}
+            translatedText={p.translatedText}
+            translatedBy={p.translatedBy}
+            translationDate={p.translationDate}
+          />
+        </Collapse>
+      ))}
     </TransitionGroup>
   );
 }
