@@ -57,7 +57,7 @@ export default function AppLogo({
             ${borderBase && 'border-r-2 pr-2 border-slate-100'}  
              ${clsParent}  ${className} `}
           >
-            <span className={`${clsTitle} text-amber-400 `}>SHIKOMORI</span>
+            <span className={`${clsTitle} text-amber-400 `}>FzTranslate</span>
             <small className={`${clsSubTitle} font-normal`}>Taradjam</small>
           </Typography>
         </a>

@@ -9,6 +9,7 @@ import AppLogo from '@/components/app/AppLogo';
 import FZDialog from '@/components/misc/Dialog';
 import Link from '@/components/misc/Link';
 import mainImage from '@/images/mainImage2.png';
+import { APP_DESCRIPTION } from '@/lib/Constants';
 
 const LandPage = () => {
   return (
@@ -20,7 +21,7 @@ const LandPage = () => {
             variant='body2'
             className='text-[0.98rem] font-mono text-center text-slate-100'
           >
-            Une platforme pour la création de donnée en langue comorienne
+            {APP_DESCRIPTION}
           </Typography>
         </Stack>
         <Stack className='self-center justify-center gap-1'>
@@ -41,15 +42,15 @@ const LandPage = () => {
             variant='body2'
             className='font-serif text-center text-xl text-slate-100'
           >
-            Ce projet consiste, à partir de phrases en langues{' '}
+            Ce projet consiste, à partir de phrases en un langues{' '}
             <span className='text-yellow-400 font-semibold text-[1.2rem]'>
-              française
+              source
             </span>
-            , de recevoir des propositions de traduction en langue{' '}
+            , de recevoir des propositions de traduction en un langue de{' '}
             <span className='text-green-400 font-semibold text-[1.2rem]'>
-              comorienne
+              destination
             </span>
-            , pour crée un dataset de données des deux langues.
+            , pour créer un dataset de données sur plusieurs langues.
           </Typography>
         </Stack>
       </section>

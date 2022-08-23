@@ -33,7 +33,7 @@ function TextOriginal({
       className={`
       ${translatedText ? 'bg-cyan-100' : 'bg-red-100'} 
       ${isSelected && `bg-yellow-100 border-yellow-200 `}
-      bg-opacity-30 cursor-p"i"ter ${className}
+      bg-opacity-30 cursor-pointer ${className}
         `}
       onClick={onClick}
     >
