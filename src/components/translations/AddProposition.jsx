@@ -1,26 +1,18 @@
 import GradingTwoToneIcon from '@mui/icons-material/GradingTwoTone';
-import { Alert, Box, Button, Snackbar, TextField } from '@mui/material';
-import Slide from '@mui/material/Slide';
+import { Box, Button, TextField } from '@mui/material';
 import axios from 'axios';
 import { useCallback, useEffect, useRef, useState } from 'react';
+import { useSelector } from 'react-redux';
+import { mutate } from 'swr';
 
-import { API_URL } from '@/lib/Constants';
+import { API_ENDPOINTS } from '@/lib/Constants';
 
-/**
- * @param {{
- *  textLoading: boolean,
- *  propositionLoading: boolean,
- *  selectedSentence:SentenceData,
- *  mutate: import("swr").KeyedMutator<SentenceProposition>
- * }} props
- */
+import AlertSnackBar from '@/components/misc/AlertSnackBar';
 
-export default function AddProposition({
-  textLoading,
-  selectedSentence,
-  mutate,
-  propositionLoading,
-}) {
+import { getCurrentSelectedSentence } from '@/features/Sentences';
+
+/** @param {{ textLoading: boolean, propositionLoading: boolean }} props */
+export default function AddProposition({ textLoading, propositionLoading }) {
   /** @type {import("react").MutableRefObject<HTMLFormElement>} */
   const formRef = useRef(null);
   const [proposedTranslation, setProposedTranslation] = useState('');
@@ -28,12 +20,14 @@ export default function AddProposition({
   useEffect(() => {
     setProposedTranslation(formRef?.current?.proposed.value || '');
   }, []);
+  const currentSentence = useSelector(getCurrentSelectedSentence);
+
   const author = 'Anonyme';
   const onSubmit = useCallback(
     async (e) => {
       e.preventDefault();
       const data = {
-        textVoId: selectedSentence.textId,
+        sentenceVoId: currentSentence.sentenceVoId,
         translatedText: proposedTranslation,
         translatedBy: author,
         translationDate: new Date(Date.now()),
@@ -42,18 +36,20 @@ export default function AddProposition({
       /** @type {import("axios").AxiosResponse} */
       let response;
       try {
-        response = await axios.post(`${API_URL}/propose/new/translation`, data);
+        response = await axios.post(API_ENDPOINTS.addNewProposition(), data);
         if ([200, 202].includes(response.status)) {
           setProposedTranslation('');
           e.target.reset();
-          mutate();
+          await mutate(
+            API_ENDPOINTS.getProposedTranslations(currentSentence.sentenceVoId),
+          );
         }
       } catch (err) {
         // eslint-disable-next-line no-unused-expressions
         String(err.message).endsWith('409') && setExists(true);
       }
     },
-    [mutate, proposedTranslation, selectedSentence?.textId],
+    [proposedTranslation, currentSentence?.sentenceVoId],
   );
   const label = 'Proposer une traduction';
   return (
@@ -61,22 +57,18 @@ export default function AddProposition({
       autoComplete='off'
       onSubmit={proposedTranslation ? onSubmit : undefined}
       component='form'
-      className='flex flex-col gap-0 mt-1'
+      className='mt-1 flex flex-col gap-0'
       ref={formRef}
     >
-      <Snackbar
+      <AlertSnackBar
         open={exists}
-        autoHideDuration={6000}
         onClose={() => setExists(false)}
         anchorOrigin={{ vertical: 'top', horizontal: 'center' }}
-        TransitionComponent={SlideTransition}
-      >
-        <Alert onClose={() => setExists(false)} severity='error' className=''>
-          La traduction que vous avez proposée existe déjà.
-        </Alert>
-      </Snackbar>
+        severity='error'
+        text='La traduction que vous avez proposée existe déjà.'
+      />
       <TextField
-        className='w-full text-xl border-0 outline-none'
+        className='w-full border-0 text-xl outline-none'
         autoFocus
         sx={{ border: 'none', outline: 'none' }}
         disabled={textLoading || propositionLoading}
@@ -102,9 +94,4 @@ export default function AddProposition({
       </Button>
     </Box>
   );
-}
-
-function SlideTransition(props) {
-  // eslint-disable-next-line react/jsx-props-no-spreading
-  return <Slide {...props} direction='down' />;
 }

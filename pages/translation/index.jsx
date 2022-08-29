@@ -1,17 +1,24 @@
-import 'dayjs/locale/fr';
-
 import MenuOpenRoundedIcon from '@mui/icons-material/MenuOpenRounded';
 import { Box, Button, useMediaQuery } from '@mui/material';
 import { useTheme } from '@mui/styles';
 import dayjs from 'dayjs';
 import relativeTime from 'dayjs/plugin/relativeTime';
 import { useCallback, useEffect, useState } from 'react';
+import { useDispatch } from 'react-redux';
+import 'dayjs/locale/fr';
+
+import { LOCAL_STORAGE_SELECTED_INDEX } from '@/lib/Constants';
+import useInfiniteSentences from '@/hooks/useInfiniteSentences';
 
 import AppLayout from '@/components/app/AppLayout';
 import FZDialog from '@/components/misc/Dialog';
 import ListOfSentences from '@/components/translations/ListOfSentences';
 import TextTranslationPane from '@/components/translations/TextTranslationPane';
-import useInfiniteSentences from '@/hooks/useInfiniteSentences';
+
+import {
+  setCurrentSelectedIndex,
+  setCurrentSelectedSentence,
+} from '@/features/Sentences';
 
 dayjs.extend(relativeTime);
 dayjs.locale('fr');
@@ -21,19 +28,22 @@ export default function Index() {
   const handleClick = useCallback(() => setOpen(!open), [open]);
   const theme = useTheme();
   const matches = useMediaQuery(theme.breakpoints.up('tablet'));
-  useEffect(() => setOpen(matches ? false : open || false), [matches, open]);
-  const response = useInfiniteSentences({ pageSize: 10, page: 0 });
+  useEffect(() => setOpen(matches ? false : open || false), [matches, open]); // Close the menu if the screen is big enough
+  const response = useInfiniteSentences({ pageSize: 10, page: 0 }); // Fetch sentences from the API
   const { isLoading, data, setSize, size, isReachingEnd } = response;
-  const sentencesRes = useSentences(data);
-  const [selectedSentence, sentences, selected, setSelected] = sentencesRes;
+  const [sentences, setCurrentIndex, selectedSentence] = useSentences(data);
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(setCurrentSelectedSentence(selectedSentence));
+  }, [dispatch, selectedSentence]);
+
   const UsableListOfSentences = useCallback(
     () => (
       <ListOfSentences
         isLoading={isLoading}
         isReachingEnd={isReachingEnd}
         sentences={sentences}
-        selected={selected}
-        setSelected={setSelected}
+        setSelected={setCurrentIndex}
         onLoadMore={() => {
           setSize(size + 1);
           localStorage.setItem('size', size);
@@ -41,8 +51,7 @@ export default function Index() {
         onClick={() => setOpen(false)}
       />
     ),
-    // eslint-disable-next-line react-hooks/exhaustive-deps
-    [sentences],
+    [isLoading, isReachingEnd, sentences, setCurrentIndex, setSize, size],
   );
   return (
     <AppLayout>
@@ -52,13 +61,13 @@ export default function Index() {
         aria-label='Sentences list'
         onClick={handleClick}
         color='inherit'
-        className='self-end my-1'
+        className='my-1 self-end'
         startIcon={<MenuOpenRoundedIcon className='text-5xl' />}
         sx={{ display: { tablet: 'none' } }}
       >
         Voir les phrases
       </Button>
-      <Box className='grid grid-cols-1 sm:grid-cols-[1fr_0.5fr] gap-2 overflow-hidden'>
+      <Box className='grid grid-cols-1 gap-2 overflow-hidden sm:grid-cols-[1fr_0.5fr]'>
         <TextTranslationPane
           isLoading={isLoading}
           selectedSentence={selectedSentence}
@@ -88,13 +97,19 @@ export default function Index() {
 function useSentences(dataSentences = []) {
   /** @type {SentenceData[]} */
   const sentences = [];
-  let selectedIndex = 0;
+  let storedIndex = 0;
+  const dispatch = useDispatch();
   if (typeof window !== 'undefined') {
-    selectedIndex = Number(localStorage.getItem('selectedIndex'));
+    storedIndex =
+      Number(localStorage.getItem(LOCAL_STORAGE_SELECTED_INDEX)) || 0;
   }
-  const [selected, setSelected] = useState(selectedIndex ?? 0);
+
+  const [currentIndex, setCurrentIndex] = useState(storedIndex);
+
   dataSentences.forEach(({ data }) => sentences.push(...data));
-  const index = selected >= 0 && selected < sentences.length ? selected : 0;
-  const selectedSentence = sentences[index];
-  return [selectedSentence, sentences, selected, setSelected];
+  const selectedIndex =
+    currentIndex >= 0 && currentIndex < sentences.length ? currentIndex : 0;
+  const selectedSentence = sentences[selectedIndex];
+  dispatch(setCurrentSelectedIndex(selectedIndex));
+  return [sentences, setCurrentIndex, selectedSentence];
 }

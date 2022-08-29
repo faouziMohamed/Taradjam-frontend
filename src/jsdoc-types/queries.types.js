@@ -24,7 +24,7 @@
 
 /**
  * @typedef {{langId:number, langName:string, langShortName:string}} SrcLanguage
- * @typedef {{textId:number, sentenceVo:string, srcLanguage:SrcLanguage }} SentenceData
+ * @typedef {{sentenceVoId:number, sentenceVo:string, srcLanguage:SrcLanguage }} SentenceData
  * @template TDataReturned
  * @typedef {{
  * currentPageSize:number,
@@ -37,16 +37,14 @@
  */
 
 /**
- * @typedef {{upVote:number, downVote:number}} VotesCount
- *
  * @typedef {{
  * propositionId:string,
  * translatedText:string,
  * translationHash:string,
  * translatedBy:string,
  * translationDate:Date,
- * votes:VotesCount
+ * votes:number
  *}} Proposition
  *
- * @typedef {{ sentenceId:string, propositions:Proposition[]}} SentenceProposition
+ * @typedef {{ SentenceVoId:string, propositions:Proposition[]}} SentenceProposition
  */

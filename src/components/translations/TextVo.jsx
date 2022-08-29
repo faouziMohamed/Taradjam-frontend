@@ -4,7 +4,7 @@ import { memo } from 'react';
 /**
  * @param {{
  * elRef:import("react").RefObject<HTMLParagraphElement>,
- * textId:int,
+ * sentenceVoId:int,
  * sentenceVo:string,
  * translatedText:string,
  * className:string,
@@ -14,7 +14,7 @@ import { memo } from 'react';
  */
 function TextOriginal({
   elRef,
-  textId,
+  sentenceVoId,
   sentenceVo,
   translatedText,
   className = '',
@@ -23,17 +23,17 @@ function TextOriginal({
 }) {
   return (
     <Typography
-      key={textId}
-      data-id={textId}
-      id={textId}
+      key={sentenceVoId}
+      data-id={sentenceVoId}
+      id={sentenceVoId}
       lang='fr'
       tabIndex={0}
       component='p'
       ref={elRef}
       className={`
       ${translatedText ? 'bg-cyan-100' : 'bg-red-100'} 
-      ${isSelected && `bg-yellow-100 border-yellow-200 `}
-      bg-opacity-30 cursor-pointer ${className}
+      ${isSelected && `border-yellow-200 bg-yellow-100 `}
+      cursor-pointer bg-opacity-30 ${className}
         `}
       onClick={onClick}
     >

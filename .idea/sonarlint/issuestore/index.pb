@@ -1,8 +1,6 @@
 
 9
 	README.md,8\e\8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d
-=
-jsconfig.json,5\6\56f2d335ffa27c20b4ea310cf0214fa96f325894
 F
 pages/api/data-init.js,a\8\a8722395ad5d0c1042fc8ab95e0f5c2a001e3085
 V
@@ -11,3 +9,61 @@ O
 pages/api/sentences/proposed.js,d\5\d5ff792225bfa1623775b45723b50b6f098c4952
 6
 m.json,8\5\85a888ad6f2350a807574bb0c8acae22ce02a026
+L
+.idea/codeStyles/Project.xml,6\e\6ecd6000a7b6f4a2884412ff19f74193ed089648
+T
+$.idea/codeStyles/codeStyleConfig.xml,d\d\dd7b3350c29c49497756c7f32c69a3bed18b1cba
+\
+,.idea/inspectionProfiles/Project_Default.xml,4\9\496a238a6afa168dbaf6efd37bb459331589579c
+w
+G.idea/sonarlint/issuestore/8/5/85a888ad6f2350a807574bb0c8acae22ce02a026,f\c\fce031c0c62d96a63921108b9b0faebcabcecaf3
+w
+G.idea/sonarlint/issuestore/d/5/d5ff792225bfa1623775b45723b50b6f098c4952,9\b\9ba7d53dacb8dcb595a4f0e26391011f6bda1191
+w
+G.idea/sonarlint/issuestore/8/e/8ec9a00bfd09b3190ac6b22251dbb1aa95a0579d,b\4\b4a0b63ce8560bbc5de0f9995c20cc861dc2adb3
+w
+G.idea/sonarlint/issuestore/c/7/c7a834883cfd5ae9b85ffb4395606f55bc375ca9,c\a\ca518084d3667c31abb62d3a488cf22a8576dc83
+>
+.gitattributes,2\4\24139dae656713ba861751fb2c2ac38839349a7a
+w
+G.idea/sonarlint/issuestore/a/8/a8722395ad5d0c1042fc8ab95e0f5c2a001e3085,3\d\3d8ee3bc0db729bbd166917b5f5f6c49e0590cf8
+A
+.husky/pre-commit,a\b\ab6c0c74cc7cd7c8c8b24da380d18aa4667658ae
+D
+data/french_data.csv,f\b\fb88ce9b1592665cfec7618403dd32a8cac9fefd
+J
+.idea/jsLinters/eslint.xml,e\b\eb1f02ca8ef3d0da59c956a13898780dee950d48
+>
+next.config.js,8\1\811a6d5a2e04fadb44d8eec365f2fa8af5c4facf
+P
+ src/components/header/Header.jsx,f\b\fb61ea60bd9a3589a8bd04d22589abf09b75c994
+O
+src/components/header/Baner.jsx,5\d\5ddc5a32d583dca48afd1b8a98dc74149b85f48f
+P
+ src/components/header/AppBar.jsx,4\7\4775bce325f1d9ba3beabcd231ce7eab84567044
+N
+src/components/app/AppLogo.jsx,a\6\a6e489a17bca449e642881b972d7b1a4060ad24a
+Q
+!src/components/misc/Copyright.jsx,d\b\db935d59f0a5aeb3696520b40f4283d34c6d8848
+Q
+!src/components/misc/Skeletons.jsx,d\5\d59a6e076c34751854d25532c4fa246e570cf14e
+C
+src/hooks/hooks.jsx,d\b\db7cb0fc4ec486af91c09f0aee4348f2d6d41c7b
+<
+.eslintcache,2\1\21d5732e90750915458158e179e86c3b1690252c
+4
+.env,3\c\3c84dcdc6bbe3d7817c49dcdc327b926fea1808a
+?
+pages/index.jsx,a\8\a81c4236a34bc5c3fb289d595f3ce5855dee26d5
+>
+pages/_app.jsx,5\7\5704056030ce42f75a8b4371643e0ba6884e2f66
+E
+src/features/store.js,f\9\f96cd3e906d55296b1f83feb373c45d93864ffb0
+U
+%src/components/app/DialogLayouted.jsx,7\5\7573a68fb7388bba7ea218ba23c2b734d4f811c8
+P
+ src/components/spinners/dots.jsx,9\2\92c445c52d44288f6ab31e887f1e3a9260fdec03
+R
+"src/components/misc/Transition.jsx,4\b\4bd01797bd86c98ce582a57b05d52e8a6bd37fdd
+I
+src/features/Sentences.js,8\7\871416e72a4911b19d55aa137afd23a6dce7869c

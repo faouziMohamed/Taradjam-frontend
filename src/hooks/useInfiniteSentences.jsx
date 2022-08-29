@@ -1,5 +1,6 @@
 import useSWRInfinite from 'swr/infinite';
 
+import { API_ENDPOINTS } from '@/lib/Constants';
 import { fetcher } from '@/lib/utils';
 
 /**
@@ -20,7 +21,8 @@ function getKey({
 }) {
   return (pageNumber = page) => {
     const queries = { pageNumber, pageSize, shuffle, variant };
-    return `sentences?${new URLSearchParams(queries)}`;
+    const queryString = new URLSearchParams(queries).toString();
+    return API_ENDPOINTS.getSentences(queryString);
   };
 }
 

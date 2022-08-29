@@ -1,8 +1,6 @@
 import axios from 'axios';
 import { createHash } from 'crypto';
 
-import { API_URL } from '@/lib/Constants';
-
 import AppError from './errors';
 
 /**
@@ -61,7 +59,7 @@ export const round = (n, precision) => {
 /**
  * @param {number} number
  * */
-export function golfyNumber(number) {
+export function beautifyNumber(number) {
   const n = Number(number);
   const { floor, abs, log, min } = Math;
   const abbrev = ['k', 'm', 'md'];
@@ -80,8 +78,7 @@ export function castToAppError(e, code = 500) {
  * @template TData
  * @returns {Promise<TData>}
  */
-export const swrFetcher = (url) =>
-  axios.get(`${API_URL}/${url}`).then((res) => res.data);
+export const swrFetcher = (url) => axios.get(url).then((res) => res.data);
 
 /**
  * @param {string} url

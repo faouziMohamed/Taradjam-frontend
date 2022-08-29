@@ -2,10 +2,11 @@
 import { Collapse, List, Skeleton, Stack, Typography } from '@mui/material';
 import { TransitionGroup } from 'react-transition-group';
 
-import { RectangularSkeletonWaves } from '@/components/misc/Skeletons';
 import { useProposedTranslation } from '@/hooks/useDataFetching';
 
-import AddProposition from './AddProposition';
+import { RectangularSkeletonWaves } from '@/components/misc/Skeletons';
+import AddProposition from '@/components/translations/AddProposition';
+
 import ProposedTranslation from './ProposedTranslation';
 
 /**
@@ -18,34 +19,32 @@ export default function TextTranslationPane({
   isLoading: textLoading,
   selectedSentence,
 }) {
-  const res = useProposedTranslation(selectedSentence?.textId);
-  const { data: proposed, isLoading: propositionLoading, error, mutate } = res;
+  const res = useProposedTranslation(selectedSentence?.sentenceVoId); // Fetch proposed translations for the selected sentence
+  const { data: proposed, isLoading: propositionLoading, error } = res;
   return (
-    <Stack gap={2} className='p-3 overflow-auto'>
-      <Stack gap={0.5} className='shadow-sm p-1 shadow-black rounded'>
+    <Stack gap={2} className='overflow-auto p-3'>
+      <Stack gap={0.5} className='rounded p-1 shadow-sm shadow-black'>
         {textLoading ? (
           <Skeleton
             variant='rectangular'
-            className='w-full h-[3.75rem] rounded-lg bg-cyan-100'
+            className='h-[3.75rem] w-full rounded-lg bg-cyan-100'
             animation='wave'
           />
         ) : (
           <Typography
             variant='body1'
             component='p'
-            className='p-2 bg-opacity-100 rounded bg-cyan-100 text-center text-2xl'
+            className='rounded bg-cyan-100 bg-opacity-100 p-2 text-center text-2xl'
           >
             {selectedSentence.sentenceVo}
           </Typography>
         )}
         <AddProposition
           textLoading={textLoading}
-          selectedSentence={selectedSentence}
-          mutate={mutate}
           propositionLoading={propositionLoading}
         />
       </Stack>
-      <List className='overflow-y-auto bg-white border border-gray-100 p-0 w-full flex flex-col rounded'>
+      <List className='flex w-full flex-col overflow-y-auto rounded border border-gray-100 bg-white p-0'>
         {propositionLoading || error ? (
           <RectangularSkeletonWaves length={10} />
         ) : (
@@ -70,6 +69,7 @@ function PropositionsWithTransition({ proposed }) {
             translatedText={p.translatedText}
             translatedBy={p.translatedBy}
             translationDate={p.translationDate}
+            votes={p.votes}
           />
         </Collapse>
       ))}

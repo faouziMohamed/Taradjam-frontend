@@ -8,7 +8,8 @@
       "@/components/*": ["./src/components/*"],
       "@/theme/*": ["./src/theme/*"],
       "@/api-utils/*": ["./src/api-utils/*"],
-      "@/images/*": ["./public/images/*"]
+      "@/images/*": ["./public/images/*"],
+      "@/features/*": ["./src/features/*"]
     }
   },
   "exclude": ["node_modules"],

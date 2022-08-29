@@ -1,5 +1,6 @@
 import useSWR from 'swr';
 
+import { API_ENDPOINTS } from '@/lib/Constants';
 import { fetcher } from '@/lib/utils';
 
 /** @param {string} key */
@@ -82,9 +83,9 @@ export const useRandomSentences = ({
   return useFetchSentences(key);
 };
 
-/** @param {string} tid */
-export function useProposedTranslation(tid) {
-  const key = `proposed/translations/${tid}`;
+/** @param {number} sentenceVoId */
+export function useProposedTranslation(sentenceVoId) {
+  const key = API_ENDPOINTS.getProposedTranslations(sentenceVoId);
   /** @type {import("swr").SWRResponse<SentenceProposition>} */
   const res = useSWR(key, fetcher);
   const { data, error, mutate } = res;
