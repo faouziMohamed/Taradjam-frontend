@@ -15,8 +15,8 @@ module.exports = {
   async redirects() {
     return [
       {
-        source: '/(.*)',
-        destination: 'https://taradjam.vercel.app/',
+        source: '/:slug*',
+        destination: 'https://taradjam.vercel.app/:slug*',
         permanent: true,
       },
     ];
