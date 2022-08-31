@@ -10,8 +10,15 @@ module.exports = {
   async headers() {
     return [{ source: '/(.*)', headers: createSecureHeaders() }];
   },
+  output: 'standalone',
   // removeConsole: { exclude: excludeConsole },
-  experimental: {
-    outputStandalone: true,
+  async redirects() {
+    return [
+      {
+        source: '/*',
+        destination: 'https://taradjam.vercel.app/',
+        permanent: true,
+      },
+    ];
   },
 };
