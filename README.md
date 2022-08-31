@@ -1,11 +1,4 @@
-# Comorian Dataset for NMT | translation 🇫🇷\\|/🇰🇲
-
-⭐ This project is set to create a dataset of sentences **🇫🇷 French - 🇰🇲 Comorian**.  
-The platform shows to users Sentences in French and give to users the possibility of offering a Comorian translations.
-
-- Final (Accepted) translations will be validate by privileged users (admins, master of comorian language).
-- Criteria to become a privileged user will be release soon after a official V1
-
+# Taradjam (Translate in Shi Komori)
 ## Getting Started
 
 { First ⭐ star && ⚔️ Fork && Clone this repo }
