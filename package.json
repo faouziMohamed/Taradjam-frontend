@@ -9,7 +9,7 @@
     "build": "next build",
     "start": "next start",
     "lint": "next lint --fix",
-    "format": "prettier *.{js,jsx,json,scss}",
+    "format": "prettier *.{js,jsx,json,scss} --write",
     "prepare": "husky install",
     "test:unit": "jest"
   },

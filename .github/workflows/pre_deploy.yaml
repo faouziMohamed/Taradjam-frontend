@@ -1,0 +1,29 @@
+name: Deploy to Vercel
+on:
+  workflow_dispatch:
+  push:
+    branches:
+      - aspbackend
+
+jobs:
+  release-to-production:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+
+      - name: Install dependencies
+        run: |
+          npm install -g yarn
+          yarn install
+
+      - name: Run linting and formatting
+        run: |
+          yarn format --write
+          yarn lint 
+
+      - name: deploy 🚀
+        uses: JamesIves/github-pages-deploy-action@4.1.4
+        with:
+          branch: release-to-vercel-production
+          folder: .
