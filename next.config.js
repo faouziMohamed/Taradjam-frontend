@@ -16,7 +16,7 @@ module.exports = {
     return [
       {
         source: '/(.*)',
-        destination: 'https://taradjam.vercel.app/(.*)',
+        destination: 'https://taradjam.vercel.app/',
         permanent: true,
       },
     ];
