@@ -5,7 +5,7 @@ import LandPage from '@/components/home/LandPage';
 
 export default function Main() {
   return (
-    <Container className='max-w-none absolute top-0 left-0 h-full smh:overflow-hidden overflow-auto p-0 w-full bg-hero-pattern bg-no-repeat bg-fixed'>
+    <Container className='absolute top-0 left-0 h-full w-full max-w-none overflow-auto bg-hero-pattern bg-fixed bg-no-repeat p-0 smh:overflow-hidden'>
       <Header />
       <LandPage />
     </Container>

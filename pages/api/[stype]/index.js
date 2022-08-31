@@ -2,13 +2,14 @@
 import { isValidObjectId } from 'mongoose';
 import nextConnect from 'next-connect';
 
+import AppError from '@/lib/errors';
+import middleware from '@/lib/middlewares';
+import { castToAppError } from '@/lib/utils';
+
 import {
   getSentences,
   getSentencesBeginWithId,
 } from '@/db/queries/sentences.queries';
-import AppError from '@/lib/errors';
-import middleware from '@/lib/middlewares';
-import { castToAppError } from '@/lib/utils';
 
 const handler = nextConnect()
   .use(middleware)

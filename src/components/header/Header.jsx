@@ -2,7 +2,7 @@ import HeaderAppBar from './AppBar';
 
 const Header = () => {
   return (
-    <header className='w-full flex flex-col'>
+    <header className='flex w-full flex-col'>
       <HeaderAppBar />
     </header>
   );

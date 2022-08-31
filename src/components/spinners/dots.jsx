@@ -5,7 +5,7 @@ export default function DotsLoader({ alone = false }) {
     <div
       className={`
         relative flex items-center justify-center
-        ${alone && ' absolute top-0 left-0 w-full h-full'}
+        ${alone && ' absolute top-0 left-0 h-full w-full'}
       `}
     >
       <div className='flex items-center gap-[.1rem]'>

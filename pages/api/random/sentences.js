@@ -1,9 +1,10 @@
 // @ts-nocheck
 import nextConnect from 'next-connect';
 
-import { getRandomSentences } from '@/db/queries/sentences.queries';
 import middleware from '@/lib/middlewares';
 import { castToAppError } from '@/lib/utils';
+
+import { getRandomSentences } from '@/db/queries/sentences.queries';
 
 const handler = nextConnect()
   .use(middleware)

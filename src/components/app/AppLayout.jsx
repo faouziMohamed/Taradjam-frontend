@@ -23,14 +23,14 @@ export default function AppLayout({
 }) {
   return (
     <Container
-      className={`absolute top-0 left-0 max-w-none w-full h-full p-0 m-0 
+      className={`absolute top-0 left-0 m-0 h-full w-full max-w-none p-0 
        ${!contentOverflow ? 'overflow-hidden' : 'overflow-y-auto'}
        ${className}`}
     >
       <Container
         className={`
-          grid max-w-none grid-rows-[auto_1fr] border-l  
-          border-gray-50 p-0 w-full h-full 
+          grid h-full w-full max-w-none  
+          grid-rows-[auto_1fr] border-l border-gray-50 p-0 
            ${!contentOverflow ? 'overflow-hidden' : 'overflow-y-auto'}
           `}
       >

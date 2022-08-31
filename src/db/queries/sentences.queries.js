@@ -5,8 +5,8 @@ import fs from 'fs';
 
 import AppError from '@/lib/errors';
 
-import Sentences from '../models/sentences.model';
 import { getData, getRandomData } from './queries.utils';
+import Sentences from '../models/sentences.model';
 
 const langs = { fr: 'Français', km: 'Chikomori' };
 

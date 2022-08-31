@@ -1,10 +1,11 @@
 import nextConnect from 'next-connect';
 import path from 'path';
 
-import Sentences from '@/db/models/sentences.model';
-import { importSentences } from '@/db/queries/sentences.queries';
 import middleware from '@/lib/middlewares';
 import { castToAppError } from '@/lib/utils';
+
+import Sentences from '@/db/models/sentences.model';
+import { importSentences } from '@/db/queries/sentences.queries';
 
 const handler = nextConnect()
   .use(middleware)

@@ -19,15 +19,15 @@ export default function Baner() {
     <Typography
       variant='h4'
       component='h1'
-      className='flex justify-center items-center text-cyan-600 bg-cyan-50 text-[2rem] font-bold text-center p-2 m-0'
+      className='m-0 flex items-center justify-center bg-cyan-50 p-2 text-center text-[2rem] font-bold text-cyan-600'
     >
       <Link href='/'>
         <a className='flex gap-2'>
-          <div className='relative w-[110px] flex items-center justify-center'>
+          <div className='relative flex w-[110px] items-center justify-center'>
             <Image
               src={src}
               alt='Data translate logo'
-              className='w-full h-full min-w-full object-cover'
+              className='h-full w-full min-w-full object-cover'
               layout='intrinsic'
               onMouseOver={onMouseEnter}
               onMouseOut={onMouseLeave}

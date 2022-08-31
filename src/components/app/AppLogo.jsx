@@ -49,12 +49,12 @@ export default function AppLogo({
   return (
     <Box sx={sx}>
       <Link href='/'>
-        <a className='flex justify-center items-center'>
+        <a className='flex items-center justify-center'>
           <Typography
             variant='h1'
-            className={`flex justify-center items-baseline font-bold 
-            font-mono text-center text-white
-            ${borderBase && 'border-r-2 pr-2 border-slate-100'}  
+            className={`flex items-baseline justify-center text-center 
+            font-mono font-bold text-white
+            ${borderBase && 'border-r-2 border-slate-100 pr-2'}  
              ${clsParent}  ${className} `}
           >
             <span className={`${clsTitle} text-amber-400 `}>FzTranslate</span>

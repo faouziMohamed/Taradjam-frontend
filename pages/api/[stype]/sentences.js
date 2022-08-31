@@ -1,9 +1,10 @@
 import nextConnect from 'next-connect';
 
-import { querySentences } from '@/db/queries/sentences.queries';
 import AppError from '@/lib/errors';
 import middleware from '@/lib/middlewares';
 import { castToAppError } from '@/lib/utils';
+
+import { querySentences } from '@/db/queries/sentences.queries';
 
 const possibleSlugs = Object.keys(querySentences);
 

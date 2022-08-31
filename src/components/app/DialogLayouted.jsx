@@ -10,7 +10,7 @@ export default function DialogLayouted() {
     <AppLayout>
       <DotsLoader alone />
       <FZDialog closeBtnText="D'accord" open closeOnlyOnBtnClick>
-        <Box className='flex justify-center items-center p-5 pb-0max-w-md'>
+        <Box className='pb-0max-w-md flex items-center justify-center p-5'>
           <Typography
             variant='body1'
             className='text-center text-lg text-[1.3rem]'

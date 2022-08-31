@@ -1,9 +1,10 @@
 /* eslint-disable camelcase */
 import { Types } from 'mongoose';
 
-import WaitingQueue from '@/db/models/wainting_queue.model';
 import AppError from '@/lib/errors';
 import { generateUniqueId } from '@/lib/utils';
+
+import WaitingQueue from '@/db/models/wainting_queue.model';
 
 /**
  *  @typedef {import("mongoose").Model} Model

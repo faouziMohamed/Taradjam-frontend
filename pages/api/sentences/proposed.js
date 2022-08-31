@@ -3,6 +3,10 @@
 import { isValidObjectId } from 'mongoose';
 import nextConnect from 'next-connect';
 
+import AppError from '@/lib/errors';
+import middleware from '@/lib/middlewares';
+import { castToAppError, generateUniqueId } from '@/lib/utils';
+
 import {
   addAproposition,
   createWaitingQueue,
@@ -10,9 +14,6 @@ import {
   existsSameProposition,
   getPropositionByIdTextVo,
 } from '@/db/queries/waitingQueue.queries';
-import AppError from '@/lib/errors';
-import middleware from '@/lib/middlewares';
-import { castToAppError, generateUniqueId } from '@/lib/utils';
 
 const handler = nextConnect().use(middleware);
 

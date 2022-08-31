@@ -24,3 +24,4 @@ tests.js
 src/components/translations/lst.jsx
 src/hooks/useLoadSentences.jsx
 /m.json
+/.idea/sonarlint/issuestore/

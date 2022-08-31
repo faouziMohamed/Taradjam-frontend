@@ -87,7 +87,7 @@ function LeftNavLinks() {
         >
           {pages.map(({ name, href }) => (
             <Link href={href} key={name}>
-              <a className='flex link-underlined'>
+              <a className='link-underlined flex'>
                 <MenuItem onClick={handleCloseNavMenu}>
                   <Typography>{name}</Typography>
                 </MenuItem>
@@ -99,7 +99,7 @@ function LeftNavLinks() {
       <Box sx={{ flexGrow: 1, display: { xs: 'none', md: 'flex' } }}>
         {pages.map(({ name, href }) => (
           <Link href={href} key={name}>
-            <a className='flex link-underlined'>
+            <a className='link-underlined flex'>
               <Button
                 key={name}
                 onClick={handleCloseNavMenu}
@@ -123,7 +123,7 @@ function RightNavLinks() {
   return (
     <Box sx={{ flexGrow: 0 }}>
       <Link href='/about'>
-        <a className='flex link-underlined'>
+        <a className='link-underlined flex'>
           <Button sx={{ my: 0, color: 'white', display: 'block' }}>
             À propos
           </Button>

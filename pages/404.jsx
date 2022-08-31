@@ -2,26 +2,27 @@ import { Box, Stack, Typography } from '@mui/material';
 import Image from 'next/image';
 
 import AppLayout from '@/components/app/AppLayout';
+
 import notFoundImg from '@/images/404-dark.svg';
 
 export default function NotFoundPage() {
   return (
-    <AppLayout className='bg-cyan-50 overflow-hidden' contentOverflow>
-      <Stack className=' p-8 justify-start items-center lgh:justify-center'>
-        <Stack className='gap-6 items-center'>
+    <AppLayout className='overflow-hidden bg-cyan-50' contentOverflow>
+      <Stack className=' items-center justify-start p-8 lgh:justify-center'>
+        <Stack className='items-center gap-6'>
           <Box
             className={`
-              flex items-center justify-center relative max-w-[50rem]
-              p-4 w-4/5 rounded-xl bg-yellow-200 text-center 
-              after:content-[" "] after:flex after:border-[15px] after:absolute
-              after:-bottom-7 after:border-transparent after:border-t-yellow-200
-              after:ml-[6rem] sm:after:-ml-14
+              after:content-[" "] relative flex w-4/5
+              max-w-[50rem] items-center justify-center rounded-xl bg-yellow-200 
+              p-4 text-center after:absolute after:-bottom-7 after:ml-[6rem]
+              after:flex after:border-[15px] after:border-transparent
+              after:border-t-yellow-200 sm:after:-ml-14
             `}
           >
             <Typography variant='h1' component='h1' fontSize='2rem'>
               <span> Vous venez de prendre un</span>{' '}
-              <span className='text-blue-500 font-normal'>chemin</span> qui{' '}
-              <span className='text-red-400 font-normal'>
+              <span className='font-normal text-blue-500'>chemin</span> qui{' '}
+              <span className='font-normal text-red-400'>
                 n&apos;existe pas
               </span>{' '}
               !
@@ -39,17 +40,17 @@ export default function NotFoundPage() {
 
           <Box
             className={`
-              flex items-center justify-center relative max-w-[50rem]
-              p-4 w-4/5 rounded-xl bg-cyan-200 text-center 
-              before:content-[" "] after:flex after:border-[15px] after:absolute
-              after:-top-7 after:border-transparent after:border-b-cyan-200
-              after:ml-[6rem] sm:after:-ml-20
+              before:content-[" "] relative flex w-4/5
+              max-w-[50rem] items-center justify-center rounded-xl bg-cyan-200 
+              p-4 text-center after:absolute after:-top-7 after:ml-[6rem]
+              after:flex after:border-[15px] after:border-transparent
+              after:border-b-cyan-200 sm:after:-ml-20
             `}
           >
             <Typography variant='h1' component='h1' fontSize='2rem'>
               <span> Ourengué </span>{' '}
-              <span className='text-blue-500 font-normal'>ndziya</span> amba{' '}
-              <span className='text-red-600 font-normal'> kaysi existé</span> !
+              <span className='font-normal text-blue-500'>ndziya</span> amba{' '}
+              <span className='font-normal text-red-600'> kaysi existé</span> !
             </Typography>
           </Box>
         </Stack>
