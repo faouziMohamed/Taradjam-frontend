@@ -1,5 +1,4 @@
-# Comorian Dataset for NMT | translation 🇫🇷\\|/🇰🇲
-
+# Comorian Dataset for NMT | translation 🇫🇷\\|/🇰🇲  
 ⭐ This project is set to create a dataset of sentences **🇫🇷 French - 🇰🇲 Comorian**.  
 The platform shows to users Sentences in French and give to users the possibility of offering a Comorian translations.
 
