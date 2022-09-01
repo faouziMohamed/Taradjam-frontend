@@ -1,0 +1,3 @@
+# Make sure to configure your git to use lf as line ending
+# https://stackoverflow.com/a/13154031
+* text=auto

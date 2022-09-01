@@ -1,0 +1,11 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+.nav-element {
+  @apply flex w-full text-white p-4 hover:bg-cyan-700 hover:underline decoration-2;
+}
+
+.link-underlined {
+  @apply hover:underline decoration-2;
+}
